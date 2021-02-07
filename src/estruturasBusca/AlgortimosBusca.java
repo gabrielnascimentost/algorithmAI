@@ -56,6 +56,11 @@ public class AlgortimosBusca {
         }
     }
 
+    public static void buscaBacktracking(No origem, No destino) {
+
+    }
+
+
     public static void impressao(LinkedHashMap<String, No> nosVisitados, LinkedList<No> listAbertos, NoPonderado estadoFinal){
         int auxCustoTotal = estadoFinal.custoTotal;
         System.out.println("\nNós abertos: ");
