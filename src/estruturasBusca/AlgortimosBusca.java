@@ -4,8 +4,10 @@ import com.base.Adjacencia;
 import com.base.No;
 import com.base.NoPonderado;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class AlgortimosBusca {
 
@@ -57,9 +59,55 @@ public class AlgortimosBusca {
     }
 
     public static void buscaBacktracking(No origem, No destino) {
+        System.out.println("Iniciando busca backtracking");
+        HashMap<String, No> nosVisitados = new HashMap<>();
+        Stack<No> percurso = new Stack<>();
+        int custoCaminho = 0;
+        int numInteracoes = 0;
+        boolean ehSolucao = false;
 
+        percurso.push(origem);
+        nosVisitados.put(origem.descicao, origem);
+        while (!ehSolucao) {
+            boolean noInserido = false;
+
+            if(percurso.isEmpty()){
+                ehSolucao = false;
+                break;
+            }else{
+                No auxNo = percurso.peek();
+                if(auxNo.descicao.equals(destino.descicao)){
+                    ehSolucao = true;
+                    break;
+                } else{
+                    for (Adjacencia auxAdj : auxNo.adjacencias.values()){
+                        System.out.println(auxNo.descicao + " >> " + auxAdj.getProx().valor);
+                    }
+                    for (Adjacencia adj : v.adjacencias.values()) {
+                        No auxProx = adj.getProx();
+                        if (!nosVisitados.containsKey(auxProx.descicao)) {
+                            noInserido = true;
+                            percurso.push(auxProx);
+                            nosVisitados.put(auxProx.descicao, auxProx);
+                            custoCaminho = custoCaminho + adj.getDist();
+                            break;
+                        }
+                    }
+                }
+                numInteracoes++;
+                if (!noInserido) {
+                    percurso.pop();
+                }
+            }
+        }
+        if(ehSolucao){
+            System.out.println("\nCaminho:");
+            for (No auxNo : percurso) {
+                System.out.print("[" + auxNo.descicao + "] ");
+            }
+            System.out.println("\n\nSolucao encontrada com " + numInteracoes + " iteracoes.\n\n Custo do percurso: " + custoCaminho);
+        }
     }
-
 
     public static void impressao(LinkedHashMap<String, No> nosVisitados, LinkedList<No> listAbertos, NoPonderado estadoFinal){
         int auxCustoTotal = estadoFinal.custoTotal;
