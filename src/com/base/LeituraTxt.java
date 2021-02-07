@@ -1,4 +1,4 @@
-package com.company;
+package com.base;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,17 +19,17 @@ public class LeituraTxt {
             FileInputStream entrada = new FileInputStream(arquivo);
             Scanner scanner = new Scanner(entrada);
             String qntPossibilidades = scanner.nextLine();
-            for(int i = 0; i < Integer.valueOf(qntPossibilidades); i++){
+            for(int i = 0; i < Integer.parseInt(qntPossibilidades); i++){
                 No no = new No();
                 no.descicao = scanner.next();
-                no.heuristica = Integer.valueOf(scanner.next());
+                no.heuristica = Integer.parseInt(scanner.next());
                 listaNos.add(no);
             }
 
             while (scanner.hasNext()){
-                int origem = Integer.valueOf(scanner.next());
-                int destino = Integer.valueOf(scanner.next());
-                int distancia = Integer.valueOf(scanner.next());
+                int origem = Integer.parseInt(scanner.next());
+                int destino = Integer.parseInt(scanner.next());
+                int distancia = Integer.parseInt(scanner.next());
                 listaNos.get(origem).addCaminho(listaNos.get(destino), distancia);
             }
 
