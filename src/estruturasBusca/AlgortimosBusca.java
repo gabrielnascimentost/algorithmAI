@@ -81,9 +81,9 @@ public class AlgortimosBusca {
                     break;
                 } else{
                     for (Adjacencia auxAdj : auxNo.adjacencias.values()){
-                        System.out.println(auxNo.descicao + " >> " + auxAdj.getProx().valor);
+                        System.out.println(auxNo.descicao + " >> " + auxAdj.getProx().descicao);
                     }
-                    for (Adjacencia adj : v.adjacencias.values()) {
+                    for (Adjacencia adj : auxNo.adjacencias.values()) {
                         No auxProx = adj.getProx();
                         if (!nosVisitados.containsKey(auxProx.descicao)) {
                             noInserido = true;
